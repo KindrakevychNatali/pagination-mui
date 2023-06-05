@@ -1,23 +1,33 @@
-import logo from './logo.svg';
+import axios from 'axios';
 import './App.css';
+import { useState, useEffect } from 'react';
+import {
+  Pagination,
+  PaginationItem,
+  TextField,
+  Stack,
+  Link
+} from "@mui/material";
+
+const BASE_URL = "https://hn.algolia.com/api/v1/search?";
 
 function App() {
+
+  const [posts, setPosts] = useState([]);
+  const [query, setQuery] = useState("react");
+  const [page, setPage] = useState(1);
+  const [pageQty, setPageQty] = useState(0);
+
+  useEffect(() => {
+    axios.get(BASE_URL + `query=${query}&page={page - 1}`)
+    .then(({ data }) => {
+      setPosts(data.hits);
+      setPageQty(data.nbPages);
+  }, [query, page]);
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      
     </div>
   );
 }
