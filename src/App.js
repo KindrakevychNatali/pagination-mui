@@ -1,35 +1,23 @@
-import axios from 'axios';
-import './App.css';
-import { useState, useEffect } from 'react';
-import {
-  Pagination,
-  PaginationItem,
-  TextField,
-  Stack,
-  Link
-} from "@mui/material";
+import { Container } from "@mui/material";
+import { Switch, Route } from "react-router-dom";
 
-const BASE_URL = "https://hn.algolia.com/api/v1/search?";
+import HomePage from "./HomePage";
+import About from "./About";
+import NotFound from "./NotFound";
 
 function App() {
-
-  const [posts, setPosts] = useState([]);
-  const [query, setQuery] = useState("react");
-  const [page, setPage] = useState(1);
-  const [pageQty, setPageQty] = useState(0);
-
-  useEffect(() => {
-    axios.get(BASE_URL + `query=${query}&page={page - 1}`)
-    .then(({ data }) => {
-      setPosts(data.hits);
-      setPageQty(data.nbPages);
-  }, [query, page]);
-
   return (
-    <div className="App">
-      
-    </div>
+    <Container sx={{ marginTop: 5 }} maxWidth="md">
+      <Switch>
+        <Route exact path="/" component={HomePage} />
+        <Route exact path="/about" component={About} />
+        <Route component={NotFound} />
+      </Switch>
+    </Container>
   );
 }
 
 export default App;
+
+
+

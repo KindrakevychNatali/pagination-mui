@@ -1,10 +1,14 @@
-import { createRoot } from 'react-dom';
-import App from './components/App';
-import { ThemeProvider, createTheme } from '@mui/material/styles';
+import React from "react";
+import ReactDOM from "react-dom";
+import { BrowserRouter } from "react-router-dom";
+import "./styles.css";
+import App from "./App";
 
-
-createRoot(document.getElementById('root')).render(
-  <ThemeProvider theme={theme}>
-    <App />
-  </ThemeProvider>
+ReactDOM.render(
+  <React.StrictMode>
+    <BrowserRouter>
+      <App />
+    </BrowserRouter>
+  </React.StrictMode>,
+  document.getElementById("root")
 );
